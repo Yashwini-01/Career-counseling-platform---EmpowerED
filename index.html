@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+
+    <!-- Form Section -->
+    <div id="form-section">
+        <h2>Fill in Your Details</h2>
+        <form id="resume-form" aria-labelledby="form-section">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your full name">
+            <button type="button" aria-label="Start voice input for name" onclick="startVoiceInput('name')">🎤</button><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your email address">
+            <button type="button" aria-label="Start voice input for email" onclick="startVoiceInput('email')">🎤</button><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required aria-label="Your phone number">
+            <button type="button" aria-label="Start voice input for phone number" onclick="startVoiceInput('phone')">🎤</button><br><br>
+
+            <label for="skills">Skills:</label>
+            <textarea id="skills" name="skills" placeholder="Your Skills" required aria-label="Your skills"></textarea>
+            <button type="button" aria-label="Start voice input for skills" onclick="startVoiceInput('skills')">🎤</button><br><br>
+
+            <label for="experience">Work Experience:</label>
+            <textarea id="experience" name="experience" placeholder="Your Work Experience" required aria-label="Your work experience"></textarea>
+            <button type="button" aria-label="Start voice input for work experience" onclick="startVoiceInput('experience')">🎤</button><br><br>
+
+            <label for="education">Education:</label>
+            <textarea id="education" name="education" placeholder="Your Education" required aria-label="Your educational background"></textarea>
+            <button type="button" aria-label="Start voice input for education" onclick="startVoiceInput('education')">🎤</button><br><br>
+
+            <button type="button" onclick="generateResume()" aria-label="Generate your resume">Generate Resume</button>
+        </form>
+    </div>
+
+    <!-- Template Selection Section -->
+    <div class="template-selection">
+        <button class="template template1" onclick="applyTemplate('template1')">Template 1</button>
+        <button class="template template2" onclick="applyTemplate('template2')">Template 2</button>
+        <button class="template template3" onclick="applyTemplate('template3')">Template 3</button>
+        <button class="template template4" onclick="applyTemplate('template4')">Template 4</button>
+        <button class="template template5" onclick="applyTemplate('template5')">Template 5</button>
+    </div>
+
+    <!-- Customize Resume Section -->
+    <h2>Customize Resume</h2>
+    <label for="color-picker">Color:</label>
+    <input type="color" id="color-picker" aria-label="Pick a color for the resume"><br><br>
+
+    <label for="font-picker">Font:</label>
+    <select id="font-picker" aria-label="Select a font for the resume">
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Trebuchet MS">Trebuchet MS</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Impact">Impact</option>
+        <option value="Garamond">Garamond</option>
+        <option value="Palatino Linotype">Palatino Linotype</option>
+        <option value="Bookman">Bookman</option>
+        <option value="Arial Black">Arial Black</option>
+        <option value="Times">Times</option>
+        <option value="Arial Narrow">Arial Narrow</option>
+    </select><br><br>
+
+    <label for="padding-picker">Padding:</label>
+    <input type="number" id="padding-picker" value="10" min="0" aria-label="Adjust padding for the resume"><br><br>
+
+    <label for="margin-picker">Margin:</label>
+    <input type="number" id="margin-picker" value="10" min="0" aria-label="Adjust margin for the resume"><br><br>
+
+    <button type="button" onclick="applyCustomization()" aria-label="Apply customization settings">Apply Customization</button><br><br>
+
+    <!-- Resume Content Section -->
+    <div id="resume-content" class="resume-preview" aria-live="polite">
+        <!-- Resume Preview -->
+    </div>
+
+    <button id="edit-btn" onclick="editResume()" aria-label="Edit your resume">Edit</button>
+    <button id="print-btn" onclick="printContent()" aria-label="Print your resume">Print</button>
+
+    <button type="button" onclick="startScreenReader()" aria-label="Read Resume">🎧 Read Resume</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+// Function to start screen reader for resume content
+function startScreenReader() {
+    const resumeContent = document.getElementById('resume-content');
+    const resumeText = resumeContent.textContent || resumeContent.innerText;
+    
+    const speech = new SpeechSynthesisUtterance(resumeText);
+    speech.lang = 'en-US';  // You can change the language if needed
+    window.speechSynthesis.speak(speech);
+}
+
+// Function to start voice input for each field
+function startVoiceInput(field) {
+    const inputElement = document.getElementById(field);
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    
+    recognition.onresult = function(event) {
+        inputElement.value = event.results[0][0].transcript;
+    };
+    
+    recognition.start();
+}
+
+// Function to generate the resume
+function generateResume() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const skills = document.getElementById('skills').value;
+    const experience = document.getElementById('experience').value;
+    const education = document.getElementById('education').value;
+
+    const resumeContent = `
+        <div class="resume-header">
+            <h1>${name}</h1>
+            <p>${email} | ${phone}</p>
+        </div>
+        <div class="resume-section">
+            <h3>Skills</h3>
+            <p>${skills}</p>
+        </div>
+        <div class="resume-section">
+            <h3>Work Experience</h3>
+            <p>${experience}</p>
+        </div>
+        <div class="resume-section">
+            <h3>Education</h3>
+            <p>${education}</p>
+        </div>
+    `;
+
+    document.getElementById('resume-content').innerHTML = resumeContent;
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('template-section').style.display = 'block';
+}
+
+// Function to apply selected template to resume
+function selectTemplate(templateId) {
+    document.querySelectorAll('.template-button').forEach(button => {
+        button.classList.remove('selected');
+    });
+    const selectedButton = document.querySelector(`[data-template="${templateId}"]`);
+    selectedButton.classList.add('selected');
+    const resumePreview = document.getElementById('resume-content');
+    resumePreview.className = `resume-preview ${templateId}`;
+}
+
+// Event listeners for template buttons
+document.querySelectorAll('.template-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const templateId = button.getAttribute('data-template');
+        selectTemplate(templateId);
+    });
+});
+
+// Function to apply customization
+function applyCustomization() {
+    const color = document.getElementById('color-picker').value;
+    const font = document.getElementById('font-picker').value;
+    const padding = document.getElementById('padding-picker').value;
+    const margin = document.getElementById('margin-picker').value;
+
+    const resumeContent = document.getElementById('resume-content');
+    resumeContent.style.backgroundColor = color;
+    resumeContent.style.fontFamily = font;
+    resumeContent.style.padding = `${padding}px`;
+    resumeContent.style.margin = `${margin}px`;
+}
+
+// Function to print the resume content
+function printContent() {
+    const resumeContent = document.getElementById('resume-content').outerHTML;
+    const newWindow = window.open();
+    newWindow.document.write('<html><head><title>Print Resume</title><link rel="stylesheet" href="resume.css"></head><body>');
+    newWindow.document.write(resumeContent);
+    newWindow.document.write('</body></html>');
+    newWindow.document.close();
+    newWindow.print();
+}
+
+// Function to allow editing the form again
+function editResume() {
+    document.getElementById('form-section').style.display = 'block';
+    document.getElementById('template-section').style.display = 'none';
+    document.getElementById('resume-content').style.display = 'none';
+}
+</script>

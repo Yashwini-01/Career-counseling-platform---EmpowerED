@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 100px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .profile-icon, .searchbar-icon, .notifications-icon {
+            font-size: 40px;
+            color: #221209;
+            margin-left: 20px;
+        }
+
+        .gif-container {
+            position: absolute;
+            top: 0;
+            left: 40px;
+            z-index: 1002;
+        }
+
+        .gif-container img {
+            height: 240px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            height: calc(100vh - 100px);
+        }
+
+        .jobs-container {
+            flex: 3;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .job-box {
+            background-color: #e0e0e0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .job-box h1 {
+            font-size: 24px;
+            color: black;
+            margin: 0 0 10px 0;
+            cursor: pointer;
+        }
+
+        .job-box h1:hover {
+            color: brown;
+            text-decoration: underline;
+        }
+
+        .job-box h1.clicked {
+            color: brown;
+            text-decoration: underline;
+        }
+
+        .job-box p {
+            margin: 5px 0;
+        }
+
+        .details-container {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border-left: 1px solid #ccc;
+        }
+
+        .details-container h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .details-container .job-details {
+            display: none;
+        }
+
+        .details-container .job-details.active {
+            display: block;
+        }
+
+        .apply-save-buttons {
+            margin-top: 20px;
+        }
+
+        .apply-save-buttons button {
+            margin-right: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .apply-save-buttons button.apply {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .apply-save-buttons button.save {
+            background-color: #007BFF;
+            color: white;
+        }
+        footer {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="gif-container">
+            <img src="output-onlinegiftools (4).gif" alt="Logo">
+        </div>
+        <i class="searchbar-icon">🔍</i>
+        <i class="notifications-icon">🔔</i>
+        <i class="profile-icon">👤</i>
+    </header>
+
+    <div class="main-container">
+        <div class="jobs-container">
+            <div class="job-box" onclick="showDetails('job1')">
+                <h1>Accessibility Consultant</h1>
+                <p>Location: Remote</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 1 week ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job2')">
+                <h1>Audio Description Narrator/Writer</h1>
+                <p>Location: Remote</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job3')">
+                <h1>Adaptive Sports Coach</h1>
+                <p>Location: On-site</p>
+                <p>Response time: 2 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job4')">
+                <h1>Assistive Technology Specialist</h1>
+                <p>Location: Remote</p>
+                <p>Response time: 5 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job5')">
+                <h1>Sensory-Friendly Event Planner</h1>
+                <p>Location: Hybrid</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job6')">
+                <h1>Sign Language Interpreter</h1>
+                <p>Location: On-site</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 1 week ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job7')">
+                <h1>Disability Rights Advocate</h1>
+                <p>Location: Hybrid</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job8')">
+                <h1>Inclusive UX Designer</h1>
+                <p>Location: Remote</p>
+                <p>Response time: 5 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job9')">
+                <h1>Therapeutic Recreation Specialist</h1>
+                <p>Location: On-site</p>
+                <p>Response time: 6 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job10')">
+                <h1>Workplace Diversity Trainer</h1>
+                <p>Location: Remote</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job11')">
+                <h1>Rehabilitation Counselor</h1>
+                <p>Location: Hybrid</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+            </div>
+            <div class="job-box" onclick="showDetails('job12')">
+                <h1>Service Animal Trainer</h1>
+                <p>Location: On-site</p>
+                <p>Response time: 2 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+            </div>
+        </div>
+
+        <div class="details-container">
+            <h2>Details of the job will be displayed here</h2>
+            <div id="job1" class="job-details">
+                <h3>Accessibility Consultant</h3>
+                <p>Location: Remote</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 1 week ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Evaluates and advises organizations on how to make their products, services, or physical spaces more accessible.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job2" class="job-details">
+                <h3>Audio Description Narrator/Writer</h3>
+                <p>Location: Remote</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Creates descriptive narration for videos, movies, or live performances for visually impaired audiences.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job3" class="job-details">
+                <h3>Adaptive Sports Coach</h3>
+                <p>Location: On-site</p>
+                <p>Response time: 2 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Coaches sports designed for people with disabilities, such as wheelchair basketball or para-swimming.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job4" class="job-details">
+                <h3>Assistive Technology Specialist</h3>
+                <p>Location: Remote</p>
+                <p>Response time: 5 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Designs, implements, and maintains technology that helps individuals with disabilities.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job5" class="job-details">
+                <h3>Sensory-Friendly Event Planner</h3>
+                <p>Location: Hybrid</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Organizes events designed to be accessible to individuals with sensory sensitivities, such as people with autism.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job6" class="job-details">
+                <h3>Sign Language Interpreter</h3>
+                <p>Location: On-site</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 1 week ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Facilitates communication between hearing and deaf or hard-of-hearing individuals through sign language.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job7" class="job-details">
+                <h3>Disability Rights Advocate</h3>
+                <p>Location: Hybrid</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Works on behalf of individuals with disabilities to protect and promote their rights and access to opportunities.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job8" class="job-details">
+                <h3>Inclusive UX Designer</h3>
+                <p>Location: Remote</p>
+                <p>Response time: 5 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Designs digital interfaces and experiences with a focus on accessibility and inclusivity for all users.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job9" class="job-details">
+                <h3>Therapeutic Recreation Specialist</h3>
+                <p>Location: On-site</p>
+                <p>Response time: 6 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Plans and conducts recreation programs for individuals with physical or mental disabilities to enhance their quality of life.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job10" class="job-details">
+                <h3>Workplace Diversity Trainer</h3>
+                <p>Location: Remote</p>
+                <p>Response time: 3 days</p>
+                <p>Date uploaded: 2 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Conducts training sessions aimed at fostering inclusive work environments and promoting diversity.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job11" class="job-details">
+                <h3>Rehabilitation Counselor</h3>
+                <p>Location: Hybrid</p>
+                <p>Response time: 4 days</p>
+                <p>Date uploaded: 3 weeks ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Provides counseling and support services to individuals with physical or mental disabilities to help them lead independent lives.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            <div id="job12" class="job-details">
+                <h3>Service Animal Trainer</h3>
+                <p>Location: On-site</p>
+                <p>Response time: 2 days</p>
+                <p>Date uploaded: 1 month ago</p>
+                <p>Status: Valid</p>
+                <p>Job Description: Trains service animals to assist individuals with disabilities, improving their quality of life.</p>
+                <div class="apply-save-buttons">
+                    <button class="apply">Apply</button>
+                    <button class="save">Save</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 EmpowerED-Career Counselling
+    </footer>
+    <script>
+        function showDetails(jobId) {
+            const allDetails = document.querySelectorAll('.job-details');
+            allDetails.forEach(detail => detail.classList.remove('active'));
+
+            const selectedJob = document.getElementById(jobId);
+            if (selectedJob) {
+                selectedJob.classList.add('active');
+            }
+
+            const allJobHeaders = document.querySelectorAll('.job-box h1');
+            allJobHeaders.forEach(header => header.classList.remove('clicked'));
+
+            const clickedJobHeader = document.querySelector(#${jobId}).previousElementSibling.querySelector('h1');
+            if (clickedJobHeader) {
+                clickedJobHeader.classList.add('clicked');
+            }
+        }
+    </script>
+</body>
+</html>

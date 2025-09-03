@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recommendation System</title>
+    <link rel="stylesheet" href="job_recommend.css">
+</head>
+<body>
+    <!-- Page 1: Questions -->
+    <div class="container" id="page1">
+        <h1>Job Finder</h1>
+        <p id="welcomeMessage">Welcome to the job recommendation system! Please answer the following questions to get personalized job recommendations.</p>
+        <button class="screen-reader-btn" onclick="readWelcomeMessage()">Screen Reader</button>
+
+        <!-- Question 1 -->
+        <label id="question1" for="interest">1. What is your primary field of interest?</label>
+        <select id="interest">
+            <option value="tech">Technology</option>
+            <option value="admin">Administration</option>
+            <option value="creative">Creative</option>
+        </select>
+        <button class="screen-reader-btn" onclick="readQuestion('question1', 'interest')">Read Question 1</button>
+        <button class="voice-input-btn" onclick="startVoiceInput('interest')">Voice Input</button>
+
+        <!-- Question 2 -->
+        <label id="question2" for="experience">2. How many years of experience do you have?</label>
+        <select id="experience">
+            <option value="0-1">0-1 year</option>
+            <option value="2-5">2-5 years</option>
+            <option value="5+">More than 5 years</option>
+        </select>
+        <button class="screen-reader-btn" onclick="readQuestion('question2', 'experience')">Read Question 2</button>
+        <button class="voice-input-btn" onclick="startVoiceInput('experience')">Voice Input</button>
+
+        <!-- Question 3 -->
+        <label id="question3" for="location">3. What is your preferred job location?</label>
+        <select id="location">
+            <option value="remote">Remote</option>
+            <option value="onsite">Onsite</option>
+            <option value="hybrid">Hybrid</option>
+        </select>
+        <button class="screen-reader-btn" onclick="readQuestion('question3', 'location')">Read Question 3</button>
+        <button class="voice-input-btn" onclick="startVoiceInput('location')">Voice Input</button>
+
+        <!-- Search Button -->
+        <button onclick="showRecommendations()">Search for Jobs</button>
+    </div>
+
+    <!-- Page 2: Recommendations -->
+    <div class="container recommendations" id="page2" style="display: none;">
+        <h2>Recommended Jobs</h2>
+        <button class="screen-reader-btn" onclick="readRecommendations()">Read Recommendations</button>
+        <ul id="jobList"></ul>
+        <button class="voice-input-btn" onclick="startVoiceJobSelection()">Voice Input</button>
+        <button onclick="goBackToQuestions()">Back</button>
+    </div>
+
+    <!-- Page 3: Job Details -->
+    <div class="container" id="page3" style="display: none;">
+        <h2>Job Details</h2>
+        <div id="jobDetails"></div>
+        <button onclick="goBackToRecommendations()">Back</button>
+    </div>
+
+    <script src="job_recommend.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f1fe; /* Light Purple Background */
+    color: #333;
+}
+
+header {
+    background: #A28FD0; /* Light Purple */
+    color: #fff;
+    padding: 28px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 3D box shadow */
+}
+
+header h1 {
+    font-size: 3em;
+    margin: 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* 3D text shadow */
+}
+
+
+.intro-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 20px;
+    padding-bottom: 110px; /* Extra space for the footer */
+    flex-direction: row-reverse; /* Image on the right side */
+}
+
+.intro-section h2 {
+    font-size: 2em;
+    color: #5D4F9A; /* Darker Purple */
+    text-align: left;
+    max-width: 600px;
+    white-space: normal; /* Allow the text to wrap naturally */
+}
+
+.intro-text {
+    max-width: 800px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.cta-btn {
+    background-color: #B68CDB; /* Lighter Purple */
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 3D box shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #9F76D0; /* Slightly darker purple on hover */
+    transform: translateY(-4px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+
+
+.image-container {
+    flex: 1;
+    max-width: 500px;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px;
+    background-color: transparent;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 3D box shadow */
+    border-radius: 20px; /* Rounded corners */
+    transform: translateY(50px); /* Start slightly lower for a slide-in effect */
+    opacity: 0; /* Initially hidden */
+    animation: fadeInUp 1s ease-out forwards; /* Apply the animation */
+    animation-delay: 0.5s; /* Delay to match the content */
+}
+
+/* Ensure the img inside the container maintains its styles */
+.image-container img {
+    width: 100%;
+    height: auto;
+    border: 3px solid black;
+    border-radius: 20px;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start 50px below the final position */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the original position */
+    }
+}
+
+
+
+.image-container img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 23px 0;
+    background: #A28FD0; /* Matching footer with header */
+    color: white;
+    position: relative;
+    top: 50px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); /* Top shadow for a subtle lift */
+}
+.text-container {
+    max-width: 800px;
+    animation: fadeInUp 1s ease-out forwards; /* Smooth entrance animation */
+    opacity: 0; /* Initially hidden */
+    animation-delay: 0.5s; /* Delay for smoother effect */
+    transform: translateY(50px); /* Start slightly lower for a slide-in effect */
+}
+
+/* Updated animation for smoother fade-in and slide-up */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start 50px below the final position */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the original position */
+    }
+}
+
+
+
+

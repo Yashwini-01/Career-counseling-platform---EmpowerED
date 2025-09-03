@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('image1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #4b3f72;
+    padding: 20px;
+    animation: slideshow 16s infinite;
+}
+
+/* Slideshow animation */
+@keyframes slideshow {
+    0% { background-image: url('intro_img.png'); }
+    25% { background-image: url('image2.jpg'); }
+    50% { background-image: url('image3.jpg'); }
+    75% { background-image: url('image4.jpg'); }
+    100% { background-image: url('intro_img.png'); }
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for visibility */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #6a5acd;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+select, button, input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #6a5acd;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5a4cb0;
+}
+
+.screen-reader-btn, .voice-input-btn {
+    background-color: #8a76c9;
+    color: #fff;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.recommendations ul, .job-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recommendations li, .job-details li {
+    background-color: #eee;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.drop-area {
+    border: 2px dashed #6a5acd;
+    padding: 20px;
+    text-align: center;
+    color: #6a5acd;
+    margin-bottom: 20px;
+}
