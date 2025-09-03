@@ -1,0 +1,10 @@
+.template3 {
+    font-family: 'Helvetica', sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+}
+.template3 h3 {
+    color: #34495e;
+}

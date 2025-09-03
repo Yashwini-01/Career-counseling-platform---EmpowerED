@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page with Voice Commands</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(254, 215, 173));
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .profile-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-icon div {
+            width: 50px;
+            height: 50px;
+            background-color: #ff9e57;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-icon div:hover {
+            background-color: #e88b43;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+            border-bottom: 1px solid #ccc;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #ffb85c;
+            color: white;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .video-grid iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #ff9e57;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Start Voice Button */
+        .voice-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff9e57;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .voice-btn:hover {
+            background-color: #e88b43;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search...">
+    </div>
+    <div class="profile-icon" id="profile-icon">
+        <div>U</div>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="#profile" id="menu-profile">Profile</a>
+            <a href="#courses" id="menu-courses">Courses</a>
+            <a href="#certifications" id="menu-certifications">Certifications</a>
+            <a href="#contact" id="menu-contact">Contact Us</a>
+        </div>
+    </div>
+</header>
+
+<!-- Start Voice Navigation Button -->
+<button class="voice-btn" id="start-voice-btn">Start Voice Recognition</button>
+
+<!-- Video Section -->
+<section class="video-section">
+    <h1 style="text-align: center; margin-bottom: 30px;">Explore Our Videos</h1>
+    <div class="video-grid">
+        <!-- Embedded YouTube Videos -->
+        <iframe src="https://www.youtube.com/embed/videoID1" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID2" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID3" allowfullscreen></iframe>
+        
+        <iframe src="https://www.youtube.com/embed/videoID4" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID5" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID6" allowfullscreen></iframe>
+        
+        <iframe src="https://www.youtube.com/embed/videoID7" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID8" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/videoID9" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    &copy; 2024 Video Page. All Rights Reserved.
+</footer>
+
+<script>
+    // JavaScript for the dropdown menu and voice recognition
+    document.getElementById('profile-icon').addEventListener('click', function() {
+        var dropdownMenu = document.getElementById('dropdown-menu');
+        if (dropdownMenu.style.display === 'block') {
+            dropdownMenu.style.display = 'none';
+        } else {
+            dropdownMenu.style.display = 'block';
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.getElementById('profile-icon').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('dropdown-menu').style.display = 'none';
+        }
+    });
+
+    // Function to start voice recognition
+    function startVoiceRecognition() {
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            var command = event.results[0][0].transcript.toLowerCase();
+            if (command.includes('video')) {
+                var videoNumber = parseInt(command.replace('video', '').trim());
+                var videoId = document.getElementsByTagName('iframe')[videoNumber - 1].src;
+                if (videoId) {
+                    var player = document.getElementById('video-' + videoNumber);
+                    player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Error recognizing speech: ', event.error);
+        };
+    }
+
+    document.getElementById('start-voice-btn').addEventListener('click', startVoiceRecognition);
+</script>
+</body>
+</html>

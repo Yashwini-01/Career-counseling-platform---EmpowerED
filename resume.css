@@ -1,0 +1,114 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Animated Purple and White Background */
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    position: relative;
+    background: linear-gradient(135deg, #6a0dad, #ffffff);
+    animation: backgroundAnimation 10s ease infinite;
+    overflow-y: scroll;
+    min-height: 100vh;
+}
+
+/* Background Animation */
+@keyframes backgroundAnimation {
+    0% {
+        background: linear-gradient(135deg, #6a0dad, #ffffff);
+    }
+    25% {
+        background: linear-gradient(135deg, #8a2be2, #f0f0ff);
+    }
+    50% {
+        background: linear-gradient(135deg, #9932cc, #fff0ff);
+    }
+    75% {
+        background: linear-gradient(135deg, #ba55d3, #e6e6fa);
+    }
+    100% {
+        background: linear-gradient(135deg, #6a0dad, #ffffff);
+    }
+}
+
+/* Form Section */
+.form-section {
+    background-color: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Template Selection */
+.template-selection {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.template {
+    padding: 15px 30px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1 1 calc(33.33% - 10px);
+    text-align: center;
+}
+
+.template:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.template.selected {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Buttons */
+button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Resume Section */
+.resume-section {
+    background-color: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+}
+

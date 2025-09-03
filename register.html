@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">EmpowerED.</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <nav class="navbar">
+   </nav>
+
+</div>
+
+<section class="form-container">
+   <form action="" method="post" enctype="multipart/form-data">
+      <h3>register now</h3>
+      <p>your name <span>*</span></p>
+      <input type="text" id="name" name="name" placeholder="enter your name" required maxlength="50" class="box">
+      <p>your email <span>*</span></p>
+      <input type="email" id="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
+      <p>your password <span>*</span></p>
+      <input type="password" id="pass" name="pass" placeholder="enter your password" required maxlength="20" class="box">
+      <p>confirm password <span>*</span></p>
+      <input type="password" id="c_pass" name="c_pass" placeholder="confirm your password" required maxlength="20" class="box">
+      <p>select profile <span>*</span></p>
+     
+       <a class="btn" href="home.html">Register</a>
+   </form>
+</section>
+
+
+<!-- custom js file link  -->
+<script>
+   const fields = ["name", "email", "pass", "c_pass"];
+   let currentFieldIndex = 0;
+
+   function speakText(message) {
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = "en-US";
+      window.speechSynthesis.speak(utterance);
+   }
+
+   function startSpeechRecognition(field, isFinalStep = false) {
+   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+   recognition.lang = "en-US";
+   recognition.interimResults = false;
+   recognition.maxAlternatives = 1;
+
+   recognition.start();
+
+   recognition.onresult = (event) => {
+      const spokenText = event.results[0][0].transcript.trim().toLowerCase();
+      if (isFinalStep) {
+         if (spokenText === "yes") {
+            speakText("Registration successful. Redirecting to the home page.");
+            setTimeout(() => {
+               window.location.href = "home.html"; // Redirect to home page
+            }, 3000);
+         } else {
+            speakText("Registration canceled. You can review your details.");
+         }
+      } else {
+         document.getElementById(field).value = spokenText;
+         currentFieldIndex++;
+         if (currentFieldIndex < fields.length) {
+            askForNextField();
+         } else {
+            confirmRegistration();
+         }
+      }
+   };
+
+   recognition.onerror = (event) => {
+      speakText("Sorry, I didn't catch that. Please try again.");
+   };
+}
+
+
+   function askForNextField() {
+      const nextField = fields[currentFieldIndex];
+      if (nextField) {
+         const message = `Please say your ${nextField.replace('_', ' ')}`;
+         speakText(message);
+         startSpeechRecognition(nextField);
+      }
+   }
+
+   function confirmRegistration() {
+   const password = document.getElementById("pass").value;
+   const confirmPassword = document.getElementById("c_pass").value;
+
+   if (password === confirmPassword) {
+      speakText("Thank you for registering. Redirecting to the home page.");
+      setTimeout(() => {
+         window.location.href = "home.html"; // Redirect to home page
+      }, 3000);
+   } else {
+      speakText("Your passwords do not match. Please correct them.");
+      currentFieldIndex = fields.indexOf("pass");
+      askForNextField();
+   }
+}
+
+
+   fields.forEach((fieldId, index) => {
+      const fieldElement = document.getElementById(fieldId);
+      fieldElement.addEventListener("click", () => {
+         currentFieldIndex = index;
+         const message = `Please say your ${fieldId.replace('_', ' ')}`;
+         speakText(message);
+         startSpeechRecognition(fieldId);
+      });
+   });
+</script>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

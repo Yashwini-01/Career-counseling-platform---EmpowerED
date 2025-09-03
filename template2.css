@@ -1,0 +1,13 @@
+.template2 {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+.template2 i {
+    color: #3498db;
+}
+.template2 h3 {
+    color: #2c3e50;
+}

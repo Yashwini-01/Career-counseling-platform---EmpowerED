@@ -1,0 +1,10 @@
+.template1 {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+.template1 h3 {
+    color: #2c3e50;
+}
