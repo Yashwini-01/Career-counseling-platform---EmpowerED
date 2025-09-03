@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- First Page (Form Section) -->
+    <div id="form-section">
+        <h2>Fill in Your Details</h2>
+
+        <!-- Screen Read Button for Form -->
+        <button type="button" onclick="screenReadForm()" aria-label="Start voice input and read form instructions">🎤 Screen Read Form</button><br><br>
+
+        <form id="resume-form" aria-labelledby="form-section">
+            <label for="image-url">Image URL:</label>
+            <input type="url" id="image-url" name="image-url" placeholder="Your Image URL">
+            <button type="button" aria-label="Start voice input for image URL" onclick="startVoiceInput('image-url')">🎤</button><br><br>
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your full name">
+            <button type="button" aria-label="Start voice input for name" onclick="startVoiceInput('name')">🎤</button><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your email address">
+            <button type="button" aria-label="Start voice input for email" onclick="startVoiceInput('email')">🎤</button><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required aria-label="Your phone number">
+            <button type="button" aria-label="Start voice input for phone number" onclick="startVoiceInput('phone')">🎤</button><br><br>
+
+            <label for="skills">Skills:</label>
+            <textarea id="skills" name="skills" placeholder="Your Skills" required aria-label="Your skills"></textarea>
+            <button type="button" aria-label="Start voice input for skills" onclick="startVoiceInput('skills')">🎤</button><br><br>
+
+            <label for="experience">Work Experience:</label>
+            <textarea id="experience" name="experience" placeholder="Your Work Experience" required aria-label="Your work experience"></textarea>
+            <button type="button" aria-label="Start voice input for work experience" onclick="startVoiceInput('experience')">🎤</button><br><br>
+
+            <label for="education">Education:</label>
+            <textarea id="education" name="education" placeholder="Your Education" required aria-label="Your educational background"></textarea>
+            <button type="button" aria-label="Start voice input for education" onclick="startVoiceInput('education')">🎤</button><br><br>
+            <!-- Voice command button -->
+            <button type="button" onclick="startVoiceCommand()">🎤 Start Voice Command</button>
+
+
+            <button type="button" onclick="generateResume()" aria-label="Generate your resume">Generate Resume</button>
+        </form>
+    </div>
+
+    <!-- Second Page (Customization Section) -->
+    <div id="template-section" style="display: none;">
+        <h2>Select Template and Customize</h2>
+
+        <!-- Screen Read Button for Customization Page -->
+        <button type="button" onclick="screenReadCustomization()" aria-label="Start voice input and read customization instructions">🎤 Screen Read Customization</button><br><br>
+
+        <div class="template-selection">
+            <button class="template template1" data-template="template1" onclick="applyTemplate('template1')">Template 1</button>
+            <button class="template template2" data-template="template2" onclick="applyTemplate('template2')">Template 2</button>
+            <button class="template template3" data-template="template3" onclick="applyTemplate('template3')">Template 3</button>
+            <button class="template template4" data-template="template4" onclick="applyTemplate('template4')">Template 4</button>
+            <button class="template template5" data-template="template5" onclick="applyTemplate('template5')">Template 5</button>
+        </div>
+
+        <h3>Customize Resume</h3>
+        <label for="color-picker">Color:</label>
+        <input type="color" id="color-picker"><br><br>
+
+        <label for="font-picker">Font:</label>
+        <select id="font-picker">
+            <option value="Arial">Arial</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+        </select><br><br>
+
+        <label for="padding-picker">Padding:</label>
+        <input type="number" id="padding-picker" value="10" min="0"><br><br>
+
+        <label for="margin-picker">Margin:</label>
+        <input type="number" id="margin-picker" value="10" min="0"><br><br>
+
+        <button type="button" onclick="applyCustomization()">Apply Customization</button><br><br>
+
+        <div id="resume-content" class="resume-preview" aria-live="polite"></div>
+
+        <button type="button" onclick="startVoiceCommand()">🎤 Start Voice Command</button>
+        <button id="edit-btn" onclick="editResume()">Edit</button>
+        <button id="print-btn" onclick="printContent()">Print</button>
+        <a href="job_recommend.html" class="job_recommend-btn">Job Finder</a>
+    </div>
+
+    <script src="screen_read.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        header {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            display: flex;
+            justify-content: flex-end; /* Aligns content to the right */
+            align-items: center; /* Vertically centers the content */
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 100px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            width: 100%;
+        }
+
+        footer {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .gif-container {
+            position: absolute;
+            top: 0;
+            left: 40px;
+            z-index: 1002;
+        }
+
+        .gif-container img {
+            height: 240px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        /* Navigation links styling */
+        .nav-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .logo {
+            color: black;
+            font-size: 2rem;
+            font-weight: bolder;
+        }
+
+        .logo span {
+            color: rgb(109,67, 0);
+            text-shadow: 0 0 10px rgb(109,67, 0);
+        }
+
+
+        /* Remove text-decoration from the link */
+.nav-container .links a {
+    position: relative;
+    font-size: 1.2rem;
+    color: black; /* Black color */
+    text-decoration: none; /* No underline */
+    font-weight: 500;
+    transition: 0.3s linear;
+}
+
+/* Only add underline using the ::before pseudo-element */
+.nav-container .links a::before {
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: rgb(109, 67, 0); /* Brown underline */
+    transition: 0.2s linear;
+}
+
+/* On hover, change the color to brown and animate the underline */
+.nav-container .links a:hover::before {
+    width: 100%; /* Underline on hover */
+}
+
+.nav-container .links a:hover {
+    color: rgb(109, 67, 0); /* Brown color */
+    text-decoration: none; /* Prevent the default underline */
+}
+
+
+        /* Navigation links styles */
+        .nav-container .links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+
+
+
+        .hamburg, .cancel {
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: black;
+            font-size: 2rem;
+            display: none;
+        }
+
+        .dropdown {
+            z-index: 100;
+            position: absolute;
+            top: 0;
+            transform: translateY(-500px);
+            width: 100%;
+            height: auto;
+            backdrop-filter: brightness(40%) blur(3px);
+            box-shadow: 0 0 20px black;
+            transition: 0.2s linear;
+        }
+
+        .dropdown .links a {
+            color: white;
+            display: flex;
+            text-decoration: none;
+            justify-content: center;
+            padding: 15px 0;
+            align-items: center;
+            transition: 0.2s linear;
+        }
+
+        .dropdown .links a:hover {
+            background-color: rgb(109,67, 0);
+        }
+
+        .dropdown .cancel {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* About us box styling */
+        .about-us-container {
+            background-color: #dedad3; /* Slight gray */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        /* About content styling */
+        .about-content {
+            font-size: 1.2rem;
+            color: black;
+            line-height: 1.8;
+        }
+        
+        
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="gif-container">
+        <img src="output-onlinegiftools (4) (1).gif" alt="EmpowerED Logo">
+    </div>
+    <div class="nav-container">
+        <div class="links">
+            <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="main.html">Home</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="aboutus.html">About Us</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#services">Services</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="login.html">Login</a></div>
+            <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="register.html">Register Now</a></div>
+        </div>
+        <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        <div class="dropdown">
+            <div class="links">
+                <a href="#">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#blogs">Login</a>
+                <a href="#contact">Register Now</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- About Us Section -->
+<div class="about-us-container" id="about">
+    <div class="about-content">
+        <h2>Our Services</h2>
+        <p>EmpowerED offers a range of innovative features designed to enhance career development, accessibility, and inclusivity. Our platform prioritizes users with disabilities, particularly those with visual impairments, ensuring they have the tools and resources to build fulfilling careers. Below are the key features:</p>
+
+        <p><strong>Personalized Career Guidance</strong><br>
+        EmpowerED helps users find the right career path through a brief interactive quiz consisting of 5-10 questions. This quiz assesses users' skills, interests, and preferences to generate career recommendations. Based on the quiz results, the platform suggests three potential career options, each accompanied by a brief description and the necessary qualifications. Furthermore, users receive tailored recommendations for free or affordable learning resources sourced from trusted platforms like Coursera, Khan Academy, and LinkedIn Learning. These resources support users in acquiring the skills needed for their chosen careers.</p>
+
+        <p><strong>Resume Builder with Voice Command</strong><br>
+        One of EmpowerED’s most unique features is its resume builder with a voice command system, specifically designed to assist visually impaired users. Instead of typing out resume details, users can input their personal information and job history through speech. The platform converts these voice inputs into a neatly formatted resume, making it accessible and easy for users who cannot type to create a professional document.</p>
+
+        <p><strong>Accessibility Features</strong><br>
+        EmpowerED is built with accessibility at its core. The platform integrates text-to-speech (TTS) functionality to read out content for visually impaired users, ensuring they can navigate and interact with the platform independently. Additionally, EmpowerED supports voice-controlled navigation, allowing users to complete key tasks such as logging in, taking the career quiz, and accessing their account with voice commands. The platform is fully optimized for mobile use, making it accessible to users who may not have access to laptops. Its user interface is also designed to support individuals with cognitive disorders, offering a simple and structured layout that ensures easy navigation.</p>
+
+        <p><strong>Learning and Financial Support</strong><br>
+        EmpowerED connects users with a range of free and affordable online courses that help them acquire the necessary skills for their desired careers. In addition, the platform partners with NGOs and local governments to provide small, incremental scholarships to users in immediate need of financial assistance. These efforts ensure that financial barriers do not prevent users from gaining the education and skills needed for career success.</p>
+    </div>
+</div>
+
+
+<footer>
+    <p>&copy; 2024 EmpowerED. All rights reserved.</p>
+</footer>
+
+<script>
+    function hamburg(){
+        const navbar = document.querySelector(".dropdown");
+        navbar.style.transform = "translateY(0px)";
+    }
+    function cancel(){
+        const navbar = document.querySelector(".dropdown");
+        navbar.style.transform = "translateY(-500px)";
+    }
+</script>
+
+</body>
+</html>

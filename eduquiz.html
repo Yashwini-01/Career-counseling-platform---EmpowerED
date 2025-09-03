@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerED Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            position: relative;
+        }
+
+
+        header {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            display: flex;
+            justify-content: flex-end; /* Aligns content to the right */
+            align-items: center; /* Vertically centers the content */
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 100px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .profile-icon {
+            font-size: 40px; /* Increases the size of the profile icon */
+            color: #221209; /* Set the icon color */
+        }
+        
+        
+
+
+        .gif-container {
+            position: absolute;
+            top: 0; 
+            left: 40px;
+            z-index: 1002; /* Higher than the header's z-index */
+        }
+
+        .gif-container img {
+            height: 240px; 
+            width: auto; 
+            max-width: 100%; 
+        }
+
+        .screen-reader {
+            position: absolute;
+            top: 180px;
+            left: 40px;
+            font-size: 60px;
+            cursor: pointer;
+            color: #221209;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: waves 2s infinite;
+        }
+
+        .screen-reader span {
+            position: absolute;
+            border: 2px solid #3E281A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: wave 2s infinite;
+        }
+
+        .screen-reader span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .screen-reader span:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .screen-reader span:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            width: 70%;
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .quiz {
+            background-color: #f4eeee;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .quiz h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .quiz .options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz .options label {
+            margin-bottom: 10px;
+        }
+
+        
+        
+        footer {
+            background: rgb(191,184,198);
+            background: linear-gradient(90deg, rgba(191,184,198,1) 2%, rgba(225,172,238,1) 64%);
+            display: flex;
+            justify-content: flex-end; /* Aligns content to the right */
+            align-items: center; /* Vertically centers the content */
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+
+        .answer-box {
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 70%;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .navigation-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+        }
+
+        .navigation-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #5A3825;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #3E281A;
+        }
+
+        .submit-button {
+            display: none;
+            background-color: #FFD700;
+            color: black;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .submit-button:hover {
+            background-color: #FFA500;
+        }
+    </style>
+</head>
+<body onload="startScreenReader()">
+    <div class="screen-reader" onclick="toggleScreenReader()">
+        &#128264;
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Separate GIF container -->
+    <div class="gif-container">
+        <img src="output-onlinegiftools (4) (1).gif" alt="EmpowerED Logo">
+    </div>
+    
+    <header>
+        <div class="profile-icon">&#128100;</div>
+    </header>
+    
+
+    <main>
+        <div class="quiz-container">
+            <div class="answer-box" id="answer-box">Select an option to begin</div>
+            <div class="quiz" id="quiz">
+                <h2>1) What is your preferred learning method?</h2>
+                <div class="options">
+                    <label><input type="checkbox"> (a) Visual (videos, diagrams)</label>
+                    <label><input type="checkbox"> (b) Auditory (lectures, podcasts)</label>
+                    <label><input type="checkbox"> (c) Hands-on (practical exercises)</label>
+                    <label><input type="checkbox"> (d) Reading (articles, books)</label>
+                </div>
+            </div>
+            <div class="navigation-buttons">
+                <button id="prevBtn" onclick="navigateQuestion(-1)">Previous</button>
+                <button id="nextBtn" onclick="navigateQuestion(1)">Next</button>
+            </div>
+            <button onclick="location.href='courses.html'" class="submit-button" id="submitBtn" onclick="submitQuiz()">Submit</button>
+        </div>
+    </main>
+    <footer></footer>
+
+    
+
+    <script>
+        let currentQuestion = 0;
+        const questions = [
+            "What is your preferred learning method?",
+            "What subjects are you interested in learning?",
+            "How do you prefer to learn?",
+            "What is your current skill level in your preferred learning area?",
+            "Do you have any preferences for the type of educational resource?",
+            "Do you require any accessibility features for your learning resources?",
+            "What is your preferred language for educational materials?"
+        ];
+
+        const options = [
+            [
+                "(a) Visual (videos, diagrams)",
+                "(b) Auditory (lectures, podcasts)",
+                "(c) Hands-on (practical exercises)",
+                "(d) Reading (articles, books)"
+            ],
+            [
+                "(a) Technology",
+                "(b) Business and finance",
+                "(c) Arts and humanities",
+                "(d) Science",
+                "(e) Other"
+            ],
+            [
+                "(a) Online courses",
+                "(b) Workshops or bootcamps",
+                "(c) One-on-one tutoring",
+                "(d) Self-study"
+            ],
+            [
+                "(a) Beginner",
+                "(b) Intermediate",
+                "(c) Advanced"
+            ],
+            [
+                "(a) Free resources",
+                "(b) Paid resources",
+                "(c) Mixture of both"
+            ],
+            [
+                "(a) Transcripts or subtitles for videos",
+                "(b) Sign language interpretation",
+                "(c) Screen reader-friendly materials",
+                "(d) Text-to-speech support",
+                "(e) No specific requirements"
+            ],
+            [
+                "(a) English",
+                "(b) Local language",
+                "(c) Multilingual support"
+            ]
+        ];
+
+        function loadQuestion() {
+            const quiz = document.getElementById('quiz');
+            quiz.querySelector('h2').innerText = `${currentQuestion + 1}) ${questions[currentQuestion]}`;
+            quiz.querySelector('.options').innerHTML = options[currentQuestion].map(option => 
+                `<label><input type="checkbox"> ${option}</label>`
+            ).join('');
+            document.getElementById('answer-box').innerText = 'Select an option to begin';
+            updateButtons();
+            readQuizContent();
+        }
+        function loadQuestion() {
+            const quiz = document.getElementById('quiz');
+            quiz.querySelector('h2').innerText = `${currentQuestion + 1}) ${questions[currentQuestion]}`;
+            quiz.querySelector('.options').innerHTML = options[currentQuestion].map(option => 
+                `<label><input type="checkbox"> ${option}</label>`
+            ).join('');
+            document.getElementById('answer-box').innerText = 'Select an option to begin';
+            updateButtons();
+        
+            // Add a delay for the screen reader on the first load
+            if (currentQuestion === 0) {
+                setTimeout(() => readQuizContent(), 500); // Delay for 500ms
+            } else {
+                readQuizContent();
+            }
+        }
+        
+        function readQuizContent() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const question = document.querySelector('#quiz h2').innerText;
+            const answers = Array.from(document.querySelectorAll('#quiz .options label')).map(label => label.innerText).join(', ');
+            const content = `${question} Options: ${answers}`;
+
+            const utterance = new SpeechSynthesisUtterance(content);
+            speechSynthesis.speak(utterance);
+            utterance.onend = startVoiceRecognition;
+        }
+
+        function startVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert('Voice recognition is not supported in this browser. Please try Chrome.');
+                return;
+            }
+
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                console.log('Voice recognition started...');
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Error occurred in speech recognition: ', event.error);
+            };
+
+            recognition.onresult = function(event) {
+                const spokenText = event.results[0][0].transcript.toLowerCase();
+                console.log('User said: ' + spokenText);
+                handleAnswer(spokenText);
+            };
+
+            recognition.start();
+        }
+
+        function handleAnswer(spokenText) {
+            const quiz = document.getElementById('quiz');
+            const currentOptions = options[currentQuestion];
+            let selectedIndex = -1;
+            
+            spokenText = spokenText.toLowerCase().trim();
+        
+            const optionLabels = ['a', 'b', 'c', 'd', 'e'];
+        
+            optionLabels.forEach((label, index) => {
+                if (spokenText.includes(label)) {
+                    selectedIndex = index;
+                }
+            });
+        
+            if (selectedIndex !== -1) {
+                const checkboxes = quiz.querySelectorAll('.options input[type="checkbox"]');
+                checkboxes[selectedIndex].checked = true;
+                document.getElementById('answer-box').innerText = `You selected: ${currentOptions[selectedIndex]}`;
+        
+                const confirmationMessage = `${currentOptions[selectedIndex]} has been chosen.`;
+                const utterance = new SpeechSynthesisUtterance(confirmationMessage);
+                speechSynthesis.speak(utterance);
+        
+                utterance.onend = () => {
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        loadQuestion();
+                    } else {
+                        document.getElementById('quiz').innerHTML = '<h2>Thank you for completing the quiz!</h2>';
+                        document.getElementById('nextBtn').style.display = 'none';
+                        document.getElementById('prevBtn').style.display = 'none';
+                    }
+                };
+            } else {
+                const errorMessage = "Sorry, your response was not understood. Please try again.";
+                const utterance = new SpeechSynthesisUtterance(errorMessage);
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function navigateQuestion(step) {
+            if (step === -1 && currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            } else if (step === 1 && currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function updateButtons() {
+            document.getElementById('submitBtn').style.display = (currentQuestion === 6) ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = (currentQuestion === 6) ? 'none' : 'block';
+            document.getElementById('prevBtn').style.display = (currentQuestion === 0) ? 'none' : 'block';
+        }
+
+        function submitQuiz() {
+            alert('Your quiz has been submitted!');
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

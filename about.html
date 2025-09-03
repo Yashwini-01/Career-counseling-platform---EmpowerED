@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>About Us</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="home.html" class="logo">EmpowerED.</a>
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" id="search_box" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+         <button type="button" id="voice-search-btn" class="fas fa-microphone"></button>
+      </form>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">Shaikh Anas</h3>
+         <p class="role">Student</p>
+         <a href="profile.html" class="btn">View Profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">Login</a>
+            <a href="register.html" class="option-btn">Register</a>
+         </div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div id="close-btn"><i class="fas fa-times"></i></div>
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Shaikh Anas</h3>
+      <p class="role">Student</p>
+      <a href="profile.html" class="btn">View Profile</a>
+   </div>
+   <nav class="navbar">
+      <a href="home.html"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>Mentors</span></a>
+      <a href="hackathon/introduction.html"><i class="fas fa-chalkboard-user"></i><span>Build Resume</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<div id="voice-feedback" style="display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.8); color: #fff; padding: 10px 20px; border-radius: 5px; z-index: 1000;">
+   Listening...
+</div>
+
+<section class="about">
+   <div class="row">
+      <div class="image"><img src="images/about-img.svg" alt=""></div>
+      <div class="content">
+         <h3>Why Choose Us?</h3>
+         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut dolorum quasi illo? Distinctio expedita commodi, nemo a quam error repellendus sint, fugiat quis numquam eum eveniet sequi aspernatur quaerat tenetur.</p>
+         <a href="courses.html" class="inline-btn">Our Courses</a>
+      </div>
+   </div>
+</section>
+
+
+
+
+<script>
+   const speechRecognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+   speechRecognition.lang = 'en-US';
+
+   const feedback = document.getElementById('voice-feedback');
+   const voiceSearchBtn = document.getElementById('voice-search-btn');
+   const sidebar = document.querySelector('.side-bar');
+   const toggleBtn = document.getElementById('toggle-btn');
+   const notification = document.createElement('div');
+   notification.style.position = 'fixed';
+   notification.style.top = '10px';
+   notification.style.left = '50%';
+   notification.style.transform = 'translateX(-50%)';
+   notification.style.background = 'rgba(0, 0, 0, 0.8)';
+   notification.style.color = '#fff';
+   notification.style.padding = '10px 20px';
+   notification.style.borderRadius = '5px';
+   notification.style.zIndex = '1000';
+   document.body.appendChild(notification);
+
+   const commands = {
+      "home": () => window.location.href = "home.html",
+      "about": () => window.location.href = "about.html",
+      "courses": () => window.location.href = "courses.html",
+      "mentors": () => window.location.href = "teachers.html",
+      "contact": () => window.location.href = "contact.html",
+      "profile": () => window.location.href = "profile.html",
+      "login": () => window.location.href = "login.html",
+      "register": () => window.location.href = "register.html",
+      "dark mode": () => document.body.classList.add('dark-mode'),
+      "light mode": () => document.body.classList.remove('dark-mode'),
+      "toggle theme": () => document.body.classList.toggle('dark-mode'),
+      "menu open": () => sidebar.classList.add('active'),
+      "menu close": () => sidebar.classList.remove('active')
+   };
+
+   voiceSearchBtn.addEventListener("click", () => {
+      feedback.textContent = "Listening...";
+      feedback.style.display = "block";
+      speechRecognition.start();
+   });
+
+   speechRecognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.trim().toLowerCase();
+      console.log(`Command: "${transcript}"`);
+      feedback.style.display = "none";
+
+      let commandFound = false;
+      for (const [key, action] of Object.entries(commands)) {
+         if (transcript.includes(key)) {
+            commandFound = true;
+            action();
+            notification.textContent = `Command executed: "${key}"`;
+            break;
+         }
+      }
+
+      if (!commandFound) {
+         notification.textContent = `Command "${transcript}" not recognized.`;
+      }
+
+      setTimeout(() => {
+         notification.textContent = '';
+      }, 3000);
+   };
+
+   speechRecognition.onerror = (event) => {
+      console.error("Speech Recognition Error:", event.error);
+      feedback.style.display = "none";
+      notification.textContent = `Error: ${event.error}`;
+      setTimeout(() => {
+         notification.textContent = '';
+      }, 3000);
+   };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web-speech-api/2.0.4/web-speech-api.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
